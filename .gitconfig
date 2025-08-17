@@ -1,0 +1,11 @@
+[core]
+    autocrlf = input
+    eol = lf
+
+[user]
+    email = opminded@gmail.com
+    name = Alexey Sigov
+
+# For repositories inside ~/work/ use separate .gitconfig with some overrides for default settings
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig
