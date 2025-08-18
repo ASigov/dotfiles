@@ -1,6 +1,6 @@
 MiniDeps.add("seblyng/roslyn.nvim")
 
-require("roslyn").setup({})
+require("roslyn").setup()
 
 -- Roslyn language server is installed separately. See roslyn.nvim github
 -- Config below is not full, roslyn.nvim has some of it too.
