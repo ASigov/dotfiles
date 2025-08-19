@@ -14,6 +14,7 @@ MiniDeps.add({
     source = "nvim-treesitter/nvim-treesitter-textobjects",
     checkout = "main",
 })
+MiniDeps.add("nvim-treesitter/nvim-treesitter-context")
 
 require("nvim-treesitter").install({
     "css",

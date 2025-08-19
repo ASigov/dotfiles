@@ -5,9 +5,6 @@ require("roslyn").setup()
 -- Roslyn language server is installed separately. See roslyn.nvim github
 -- Config below is not full, roslyn.nvim has some of it too.
 vim.lsp.config("roslyn", {
-    on_attach = function()
-        print("This will run when the server attaches!")
-    end,
     cmd = {
         "dotnet",
         "/home/mia/.local/share/roslyn-language-server/Microsoft.CodeAnalysis.LanguageServer.dll",
