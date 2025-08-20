@@ -4,10 +4,8 @@ require("fzf-lua").setup({
     file_icon_padding = " ",
 })
 
-vim.keymap.set("n", "<leader><leader>", "<cmd>FzfLua buffers<CR>", { desc = "[P]ick [B]uffers" })
-vim.keymap.set("n", "<leader>pf", "<cmd>FzfLua files<CR>", { desc = "[P]ick [F]iles" })
-vim.keymap.set("n", "<leader>pg", "<cmd>FzfLua live_grep<CR>", { desc = "[P]ick [G]rep" })
-vim.keymap.set("n", "<leader>ph", "<cmd>FzfLua helptags<CR>", { desc = "[P]ick [H]elptags" })
-vim.keymap.set("n", "<leader>pk", "<cmd>FzfLua keymaps<CR>", { desc = "[P]ick [K]eymaps" })
-vim.keymap.set("n", "<leader>pc", "<cmd>FzfLua commands<CR>", { desc = "[P]ick [C]ommands" })
-vim.keymap.set("n", "<leader>pn", "<cmd>FzfLua files cwd=~/.config/nvim<CR>", { desc = "[P]ick [N]vim config files" })
+vim.keymap.set("n", "<leader>b", "<cmd>FzfLua buffers<CR>", { desc = "Pick [B]uffers" })
+vim.keymap.set("n", "<leader>f", "<cmd>FzfLua files<CR>", { desc = "Pick [F]iles" })
+vim.keymap.set("n", "<leader>r", "<cmd>FzfLua live_grep<CR>", { desc = "Pick G[R]ep" })
+vim.keymap.set("n", "<leader>c", "<cmd>FzfLua files cwd=~/.config/nvim<CR>", { desc = "Pick Nvim [C]onfig files" })
+vim.keymap.set("n", "<leader>g", "<cmd>FzfLua git_status<CR>", { desc = "Pick [G]it Status" })

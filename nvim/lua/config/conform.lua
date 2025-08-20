@@ -4,5 +4,11 @@ require("conform").setup({
     formatters_by_ft = {
         lua = { "stylua" },
     },
-    format_on_save = {}, -- enable but use defaults
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.lua",
+    callback = function(args)
+        require("conform").format({ bufnr = args.buf })
+    end,
 })
