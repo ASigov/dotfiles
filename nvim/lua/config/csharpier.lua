@@ -7,7 +7,7 @@ end, {})
 
 -- Auto-format on save for .cs
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*.cs",
+    pattern = { "*.cs", "*.csproj", "*.props" },
     callback = function()
         csharpier.format_buffer()
     end,

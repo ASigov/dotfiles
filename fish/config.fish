@@ -6,6 +6,7 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx DOTNET_ROOT ~/.dotnet
 set -gx DOTNET_CLI_TELEMETRY_OPTOUT 1
+set -gx DOTNET_NOLOGO 1
 set -gx TNS_ADMIN ~/.oracle
 
 # Modify $PATH environment variable

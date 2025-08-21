@@ -15,8 +15,8 @@ function M.start_server()
     stdout = uv.new_pipe()
     stderr = uv.new_pipe()
 
-    handle = uv.spawn("dotnet", {
-        args = { "csharpier", "pipe-files" },
+    handle = uv.spawn("csharpier", {
+        args = { "pipe-files" },
         stdio = { stdin, stdout, stderr },
     }, function(code, signal)
         vim.schedule(function()
