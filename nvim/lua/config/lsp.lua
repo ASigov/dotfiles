@@ -43,9 +43,9 @@ vim.lsp.config("roslyn", {
             dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
 
             csharp_enable_inlay_hints_for_types = true,
-            csharp_enable_inlay_hints_for_implicit_variable_types = false,
+            csharp_enable_inlay_hints_for_implicit_variable_types = true,
             csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-            csharp_enable_inlay_hints_for_implicit_object_creation = false,
+            csharp_enable_inlay_hints_for_implicit_object_creation = true,
         },
         ["csharp|symbol_search"] = {
             dotnet_search_reference_assemblies = true,
@@ -89,11 +89,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         local bufnr = args.buf
 
-        -- Enable inlay hints if supported
-        if client and client:supports_method("textDocument/inlayHint") then
-            vim.lsp.inlay_hint.enable(true)
-        end
-
         -- Enable code lens if supported
         if client and client:supports_method("textDocument/codeLens") then
             vim.lsp.codelens.refresh()
@@ -103,22 +98,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 callback = vim.lsp.codelens.refresh,
             })
         end
-
-        -- Enable format on save if supported
-        -- if client and not client:supports_method('textDocument/willSaveWaitUntil')
-        --     and client:supports_method('textDocument/formatting') then
-        --     vim.api.nvim_create_autocmd('BufWritePre', {
-        --         group = lsp_augroup,
-        --         buffer = bufnr,
-        --         callback = function()
-        --             vim.lsp.buf.format({
-        --                 bufnr = bufnr,
-        --                 id = client.id,
-        --                 timeout_ms = 1000
-        --             })
-        --         end,
-        --     })
-        -- end
 
         -- Refresh Roslyn diagnostic on InsertLeave
         if client and client.name == "roslyn" and vim.bo[bufnr].filetype == "cs" then
@@ -136,17 +115,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-vim.api.nvim_create_autocmd("LspDetach", {
-    group = lsp_augroup,
-    callback = function()
-        -- Disable inlay hints
-        vim.lsp.inlay_hint.enable(false)
-
-        -- Disable format on save and Roslyn diagnostic refresh on InsertLeave
-        -- vim.api.nvim_clear_autocmds({
-        --     group = lsp_augroup,
-        --     event = { 'BufWritePre', 'InsertLeave' },
-        --     buffer = bufnr
-        -- })
-    end,
-})
+vim.keymap.set("n", "<leader>h", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle inlay [H]ints" })
