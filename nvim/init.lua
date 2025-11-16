@@ -1,3 +1,15 @@
+-- ├ init.lua          Initial (this) file executed during startup
+-- ├ plugin/           Files automatically sourced during startup
+-- ├── 10_options.lua  Built-in Neovim behavior
+-- ├── 20_keymaps.lua  Custom mappings
+-- ├── 30_mini.lua     MINI configuration
+-- ├── 40_plugins.lua  Plugins outside of MINI
+-- ├ snippets/         User defined snippets (has demo file)
+-- ├ after/            Files to override behavior added by plugins
+-- ├── ftplugin/       Files for filetype behavior (has demo file)
+-- ├── lsp/            Language server configurations (has demo file)
+-- ├── snippets/       Higher priority snippet files (has demo file)
+
 -- Bootstrap 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
 local mini_path = vim.fn.stdpath("data") .. "/site/pack/deps/start/mini.nvim"
 if not vim.loop.fs_stat(mini_path) then
@@ -20,19 +32,3 @@ end
 -- - `:h MiniDeps-commands` - all available commands
 -- - 'plugin/30_mini.lua' - more details about 'mini.nvim' in general
 require("mini.deps").setup()
-
-vim.g.mapleader = " "
-
-require("config.options")
-require("config.colorscheme")
-require("config.keymaps")
-require("config.autocommands")
-require("config.mini")
-require("config.fzf-lua")
-require("config.blink")
-require("config.lsp")
-require("config.csharpier")
-require("config.conform")
-require("config.diagnostics")
-require("config.nvim-treesitter")
-require("config.todo-comments")

@@ -1,3 +1,6 @@
+-- General ====================================================================
+vim.g.mapleader = " " -- Use `<Space>` as <Leader> key
+
 -- Search options
 vim.o.ignorecase = true
 vim.o.smartcase = true
