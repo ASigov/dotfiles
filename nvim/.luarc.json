@@ -4,15 +4,11 @@
     "version": "LuaJIT"
   },
   "workspace": {
+    "checkThirdParty": false,
+    "ignoreSubmodules": true,
     "library": [
-      "lua",
       "$VIMRUNTIME",
-      "${3rd}/luv/library",
-      "$HOME/.local/share/nvim/site/pack/deps/start/mini.nvim",
-    ],
-    "checkThirdParty": false
-  },
-  "diagnostics.globals": [
-    "MiniDeps"
-  ]
+      "${3rd}/luv/library"
+    ]
+  }
 }
