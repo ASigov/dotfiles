@@ -10,7 +10,7 @@ set -gx DOTNET_NOLOGO 1
 set -gx TNS_ADMIN ~/.oracle
 
 # Modify $PATH environment variable
-fish_add_path -g ~/.dotnet ~/.dotnet/tools ~/.local/bin ~/.cargo/bin ~/.local/share/nvm/v24.4.1/bin
+fish_add_path -g ~/.dotnet ~/.dotnet/tools ~/.local/bin ~/.cargo/bin
 
 if status is-login
     # Add homebrew into current shell (add to $PATH, $MANPATH, etc.)
