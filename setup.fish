@@ -10,6 +10,5 @@ end
 
 update_link ~/dotfiles/git/.gitconfig ~/.gitconfig
 update_link ~/dotfiles/fish/config.fish ~/.config/fish/config.fish
-update_link ~/dotfiles/fish/fish_plugins ~/.config/fish/fish_plugins
 update_link ~/dotfiles/starship/starship.toml ~/.config/starship.toml
 update_link ~/dotfiles/nvim ~/.config/nvim
