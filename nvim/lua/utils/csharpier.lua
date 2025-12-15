@@ -33,8 +33,12 @@ function M.start_server()
             while true do
                 local pos = stdout_buffer:find(etx, 1, true)
                 if not pos then break end
+
+                -- extract one complete response
                 local formatted = stdout_buffer:sub(1, pos - 1)
                 stdout_buffer = stdout_buffer:sub(pos + 1)
+
+                -- pop the next pending callback
                 local cb = table.remove(pending, 1)
                 if cb then vim.schedule(function() cb(nil, formatted) end) end
             end
@@ -76,6 +80,30 @@ function M.format_buffer(bufnr)
         end
         local new_lines = vim.split(formatted, '\n', { plain = true })
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, new_lines)
+    end)
+
+    local payload = filepath .. etx .. content .. etx
+    uv.write(stdin, payload)
+end
+
+--- Format buffer via CSharpier and then write to disk
+---@param bufnr integer|nil
+function M.format_and_write(bufnr)
+    bufnr = bufnr or vim.api.nvim_get_current_buf()
+    local filepath = vim.api.nvim_buf_get_name(bufnr)
+    local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+    local content = table.concat(lines, '\n')
+
+    table.insert(pending, function(err, formatted)
+        if err then
+            vim.notify('[CSharpier] ' .. err, vim.log.levels.ERROR)
+            return
+        end
+        local new_lines = vim.split(formatted, '\n', { plain = true })
+        vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, new_lines)
+
+        -- after buffer is updated, actually write the file
+        vim.api.nvim_buf_call(bufnr, function() vim.cmd('noautocmd write') end)
     end)
 
     local payload = filepath .. etx .. content .. etx

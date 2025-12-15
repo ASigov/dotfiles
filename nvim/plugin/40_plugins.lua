@@ -255,8 +255,8 @@ later(function()
     _G.Config.new_autocmd('FileType', { 'cs', 'xml' }, csharpier_warmup)
 
     -- Auto-format on save for C# and XML files
-    local csharpier_format = function() csharpier.format_buffer() end
-    _G.Config.new_autocmd('BufWritePre', { '*.cs', '*.csproj', '*.props', '*.slnx' }, csharpier_format)
+    local csharpier_format = function(args) csharpier.format_and_write(args.buf) end
+    _G.Config.new_autocmd('BufWriteCmd', { '*.cs', '*.csproj', '*.props', '*.slnx' }, csharpier_format)
 end)
 
 -- Color schemes ==============================================================
