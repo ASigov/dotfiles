@@ -198,5 +198,5 @@ MiniDeps.now(function()
     add('Shatur/neovim-ayu')
     add('ellisonleao/gruvbox.nvim')
 
-    vim.cmd.colorscheme('everforest')
+    vim.cmd.colorscheme('ayu-mirage')
 end)
