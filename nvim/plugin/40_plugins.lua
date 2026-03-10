@@ -120,86 +120,15 @@ now_if_args(function()
 
     require('roslyn').setup()
 
-    -- Configure and enable roslyn language server.
-    -- LSP is installed separately (manually), see roslyn.nvim github page.
-    -- Config below is not full, it will be merged with other bits from roslyn.nvim.
-    vim.lsp.config('roslyn', {
-        cmd = {
-            'dotnet',
-            '/home/mia/.local/share/roslyn-language-server/Microsoft.CodeAnalysis.LanguageServer.dll',
-            '--logLevel=Information',
-            '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
-            '--stdio',
-        },
-        settings = {
-            filewatch = 'off',
-            ['csharp|background_analysis'] = {
-                dotnet_analyzer_diagnostics_scope = 'openfiles',
-                dotnet_compiler_diagnostics_scope = 'openfiles',
-            },
-            ['csharp|code_lens'] = {
-                dotnet_enable_references_code_lens = true,
-                dotnet_enable_tests_code_lens = false,
-            },
-            ['csharp|completion'] = {
-                dotnet_show_name_completion_suggestions = true,
-                dotnet_provide_regex_completions = true,
-                dotnet_show_completion_items_from_unimported_namespaces = true,
-            },
-            ['csharp|highlighting'] = {
-                dotnet_highlight_related_regex_components = true,
-                dotnet_highlight_related_json_components = true,
-            },
-            ['csharp|inlay_hints'] = {
-                dotnet_enable_inlay_hints_for_parameters = true,
-                dotnet_enable_inlay_hints_for_literal_parameters = true,
-                dotnet_enable_inlay_hints_for_indexer_parameters = false,
-                dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-                dotnet_enable_inlay_hints_for_other_parameters = false,
-
-                dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-                dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-                dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-
-                csharp_enable_inlay_hints_for_types = true,
-                csharp_enable_inlay_hints_for_implicit_variable_types = true,
-                csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-                csharp_enable_inlay_hints_for_implicit_object_creation = true,
-            },
-            ['csharp|symbol_search'] = {
-                dotnet_search_reference_assemblies = true,
-            },
-            ['csharp|formatting'] = {
-                dotnet_organize_imports_on_format = true,
-            },
-            ['csharp|type_members'] = {
-                dotnet_member_insertion_location = 'withothermembersofthesamekind',
-                dotnet_property_generation_behavior = 'preferautoproperties',
-            },
-            ['csharp|quick_info'] = {
-                dotnet_show_remarks_in_quick_info = true,
-            },
-        },
-    })
+    -- Neovim LSP config automatically sourced from roslyn plugin and merged with after/lsp/roslyn.lua
+    --
+    -- Enable roslyn language server.
     vim.lsp.enable('roslyn')
 
-    -- Configure and enable lua language server.
-    -- LSP is installed separately with Homebrew.
-    -- Config below is not full and will be merged with settings defined in .luarc.json
-    vim.lsp.config('lua_ls', {
-        cmd = { 'lua-language-server' },
-        filetypes = { 'lua' },
-        root_markers = {
-            '.luarc.json',
-            '.luarc.jsonc',
-            '.luacheckrc',
-            '.stylua.toml',
-            'stylua.toml',
-            'selene.toml',
-            'selene.yml',
-            '.git',
-        },
-    })
+    -- Neovim LSP config automatically sourced from after/lsp/lua_ls.lua
+    -- Language server specific settings are also picked up from .luarc.json
+    --
+    -- Enable lua language server.
     vim.lsp.enable('lua_ls')
 
     local on_attach = function(args)
