@@ -198,5 +198,7 @@ MiniDeps.now(function()
     add('Shatur/neovim-ayu')
     add('ellisonleao/gruvbox.nvim')
 
-    vim.cmd.colorscheme('ayu-mirage')
+    vim.g.everforest_background = 'hard'
+    vim.g.everforest_enable_italic = true
+    vim.cmd.colorscheme('everforest')
 end)
