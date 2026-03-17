@@ -78,7 +78,11 @@ function M.format_buffer(bufnr)
             vim.notify('[CSharpier] ' .. err, vim.log.levels.ERROR)
             return
         end
-        local new_lines = vim.split(formatted, '\n', { plain = true })
+
+        -- Remove the very last newline so vim.split doesn't create an extra empty table element
+        local trimmed = formatted:gsub('\n$', '')
+        local new_lines = vim.split(trimmed, '\n', { plain = true })
+
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, new_lines)
     end)
 
@@ -99,7 +103,11 @@ function M.format_and_write(bufnr)
             vim.notify('[CSharpier] ' .. err, vim.log.levels.ERROR)
             return
         end
-        local new_lines = vim.split(formatted, '\n', { plain = true })
+
+        -- Remove the very last new line so vim.split doesn't create an extra empty table element
+        local trimmed = formatted:gsub('\n$', '')
+        local new_lines = vim.split(trimmed, '\n', { plain = true })
+
         vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, new_lines)
 
         -- after buffer is updated, actually write the file
