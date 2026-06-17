@@ -115,3 +115,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# Display Starship prompt (https://starship.rs)
+eval "$(starship init bash)"
