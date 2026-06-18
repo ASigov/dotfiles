@@ -87,10 +87,29 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+# Customize PATH environment variable
+export PATH="$HOME/.local/bin:$PATH"
+
+# eza aliases
+# Replace standard ls with eza
+alias ls='eza --icons=always --color=always --group-directories-first'
+# Long list format (permissions, ownership, size, date)
+alias ll='eza -lh --icons=always --color=always --group-directories-first'
+# Detailed long list including hidden files
+alias la='eza -lah --icons=always --color=always --group-directories-first'
+# Display files alongside their Git status
+alias lg='eza -lh --git --icons=always'
+# Display a tree view up to 2 levels deep
+alias lt='eza --tree --level=2 --icons=always'
+
+# bat aliases
+# Auto-detect if command is batcat (Ubuntu) or bat, then alias to cat
+if command -v batcat &> /dev/null; then
+    alias bat='batcat'
+fi
+
+# fd-find aliases
+alias fd='fdfind'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
